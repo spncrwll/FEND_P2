@@ -14,6 +14,7 @@ var work = {
     'description': 'Coordinated a global network of translators to meet corporate clients\' translation needs.'
   }]
 };
+
 var projects = {
   'projects': [{
     'title': 'Patent for a \'mobile telephone\'',
@@ -29,6 +30,7 @@ var projects = {
     'link': 'https://www.google.com/patents/US20120297808'
   }]
 };
+
 var bio = {
   'name': 'Spencer Walle',
   'role': 'Front-end Web Developer',
@@ -43,6 +45,7 @@ var bio = {
   'bioPic': 'images/bioPic.jpg',
   'livedBefore': ['Marseille, France', 'Barcelona, Spain']
 };
+
 var education = {
   'schools': [{
     'name': 'Princeton University',
@@ -75,6 +78,7 @@ var education = {
 };
 var data = '%data%'
 var $header = $('#header');
+
 // begin section of code that appends information
 // name, role, biopic, welcome message
 bio.displayInfo = function() {
@@ -101,13 +105,14 @@ bio.displayContacts = function() {
 bio.displayContacts();
 
 //skills
-if (bio.skills.length) {
+bio.displaySkills = function() {
   $header.append(HTMLskillsStart);
   for (var i = 0; i < bio.skills.length; i++) {
     var formattedSkill = HTMLskills.replace(data, bio.skills[i]);
     $('#skills').append(formattedSkill);
   }
-}
+};
+bio.displaySkills();
 
 //education
 education.display = function() {
@@ -120,11 +125,11 @@ education.display = function() {
     var formattedSchoolMajor = HTMLschoolMajor.replace(data, education.schools[i].major);
     $('.education-entry:last').append(formattedSchoolName + formattedDegree + formattedSchoolDates + formattedSchoolLocation + formattedSchoolMajor);
   };
-  $('#education-entry:last').append(HTMLschoolStart);
-  $('.education-entry:last').append(HTMLonlineClasses);
+  $('#education').append(HTMLonlineClasses);
   for (var i = 0; i < education.onlineCourses.length; i++) {
-    var formattedTitle = HTMLonlineTitle.replace(data, education.onlineCourses[i].title).replace('#', education.onlineCourses[i].courseURL);
-    var formattedSchool = HTMLonlineSchool.replace(data, education.onlineCourses[i].school).replace('#', education.onlineCourses[i].url);
+    $('#education').append(HTMLschoolStart);
+    var formattedTitle = HTMLonlineTitle.replace(data, education.onlineCourses[i].title);
+    var formattedSchool = HTMLonlineSchool.replace(data, education.onlineCourses[i].school);
     var formattedDates = HTMLonlineDates.replace(data, education.onlineCourses[i].dates);
     $('.education-entry:last').append(formattedTitle + formattedSchool + formattedDates);
   };
